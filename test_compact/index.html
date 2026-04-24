@@ -624,6 +624,21 @@
   /* ===================== VALIDATION ===================== */
   .error-msg { font-size: 0.78rem; color: #ef4444; margin-top: 4px; }
 
+  /* ===================== PATIENT CARD LIST ===================== */
+  .patient-card-list { display: flex; flex-direction: column; }
+  .patient-card-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 4px; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.15s;
+  }
+  .patient-card-item:last-child { border-bottom: none; }
+  .patient-card-item:hover { background: #f0f5ff; border-radius: 8px; }
+  .patient-card-avatar { font-size: 1.8rem; flex-shrink: 0; width: 40px; text-align: center; }
+  .patient-card-info { flex: 1; min-width: 0; }
+  .patient-card-name { font-weight: 700; font-size: 0.92rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .patient-card-sub  { font-size: 0.76rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .patient-card-arrow { font-size: 1.3rem; color: var(--muted); flex-shrink: 0; margin-left: 4px; }
+
   /* ===================== RECENT RECORDS LIST ===================== */
   .record-item {
     display: flex;
@@ -1568,33 +1583,65 @@
           <div class="greeting-sub" id="hw-date">Sunday, April 12, 2026</div>
           <div class="card">
             <div class="card-title">🔴 Recent Patients</div>
-            <table>
-              <thead><tr><th>Name</th><th>Age</th><th>Diagnosis</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr class="patient-row" onclick="openPatientDetail('Maria Santos',30,'F','High Blood','Treated','25.03','130/80 mmHg','98 mg/dL','O+','Pneumonia (2022)','Losartan 50g')">
-                  <td>Maria Santos</td><td>30</td><td>High Blood</td><td><span class="badge badge-green">Treated</span></td>
-                </tr>
-                <tr class="patient-row" onclick="openPatientDetail('Juan Dela Cruz',55,'M','Diabetes','On Follow-up','27.1','140/90 mmHg','180 mg/dL','B+','Hypertension (2020)','Metformin 500mg')">
-                  <td>Juan Dela Cruz</td><td>55</td><td>Diabetes</td><td><span class="badge badge-yellow">On Follow-up</span></td>
-                </tr>
-                <tr class="patient-row" onclick="openPatientDetail('Anna Reyes',42,'F','Fever','Treated','22.5','120/80 mmHg','95 mg/dL','A+','None','Paracetamol')">
-                  <td>Anna Reyes</td><td>42</td><td>Fever</td><td><span class="badge badge-green">Treated</span></td>
-                </tr>
-                <tr class="patient-row" onclick="openPatientDetail('Pedro Lim',67,'M','Hypertension','High Risk','29.0','160/100 mmHg','110 mg/dL','AB+','Stroke (2019)','Amlodipine 5mg')">
-                  <td>Pedro Lim</td><td>67</td><td>Hypertension</td><td><span class="badge badge-red">High Risk</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="patient-card-list">
+              <div class="patient-card-item" onclick="openPatientDetail('Maria Santos',30,'F','High Blood','Treated','25.03','130/80 mmHg','98 mg/dL','O+','Pneumonia (2022)','Losartan 50g')">
+                <div class="patient-card-avatar">👩</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Maria Santos</div>
+                  <div class="patient-card-sub">Age 30 · High Blood</div>
+                </div>
+                <span class="badge badge-green">Treated</span>
+                <span class="patient-card-arrow">›</span>
+              </div>
+              <div class="patient-card-item" onclick="openPatientDetail('Juan Dela Cruz',55,'M','Diabetes','On Follow-up','27.1','140/90 mmHg','180 mg/dL','B+','Hypertension (2020)','Metformin 500mg')">
+                <div class="patient-card-avatar">👨</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Juan Dela Cruz</div>
+                  <div class="patient-card-sub">Age 55 · Diabetes</div>
+                </div>
+                <span class="badge badge-yellow">On Follow-up</span>
+                <span class="patient-card-arrow">›</span>
+              </div>
+              <div class="patient-card-item" onclick="openPatientDetail('Anna Reyes',42,'F','Fever','Treated','22.5','120/80 mmHg','95 mg/dL','A+','None','Paracetamol')">
+                <div class="patient-card-avatar">👩</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Anna Reyes</div>
+                  <div class="patient-card-sub">Age 42 · Fever</div>
+                </div>
+                <span class="badge badge-green">Treated</span>
+                <span class="patient-card-arrow">›</span>
+              </div>
+              <div class="patient-card-item" onclick="openPatientDetail('Pedro Lim',67,'M','Hypertension','High Risk','29.0','160/100 mmHg','110 mg/dL','AB+','Stroke (2019)','Amlodipine 5mg')">
+                <div class="patient-card-avatar">👨</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Pedro Lim</div>
+                  <div class="patient-card-sub">Age 67 · Hypertension</div>
+                </div>
+                <span class="badge badge-red">High Risk</span>
+                <span class="patient-card-arrow">›</span>
+              </div>
+            </div>
           </div>
           <div class="card">
             <div class="card-title">📢 Due for Follow-up</div>
-            <table>
-              <thead><tr><th>Name</th><th>Last Visit</th><th>Diagnosis</th><th>Action</th></tr></thead>
-              <tbody>
-                <tr><td>Juan Dela Cruz</td><td>Apr 1, 2026</td><td>Diabetes</td><td><button class="btn-secondary" onclick="showToast('Reminder sent to Juan Dela Cruz ✓')">Send Reminder</button></td></tr>
-                <tr><td>Pedro Lim</td><td>Mar 15, 2026</td><td>Hypertension</td><td><button class="btn-secondary" onclick="showToast('Reminder sent to Pedro Lim ✓')">Send Reminder</button></td></tr>
-              </tbody>
-            </table>
+            <div class="patient-card-list">
+              <div class="patient-card-item" style="cursor:default;">
+                <div class="patient-card-avatar">👨</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Juan Dela Cruz</div>
+                  <div class="patient-card-sub">Last visit: Apr 1, 2026 · Diabetes</div>
+                </div>
+                <button class="btn-secondary" style="font-size:0.75rem;padding:6px 10px;white-space:nowrap;" onclick="showToast('Reminder sent to Juan Dela Cruz ✓')">Send Reminder</button>
+              </div>
+              <div class="patient-card-item" style="cursor:default;border-bottom:none;">
+                <div class="patient-card-avatar">👨</div>
+                <div class="patient-card-info">
+                  <div class="patient-card-name">Pedro Lim</div>
+                  <div class="patient-card-sub">Last visit: Mar 15, 2026 · Hypertension</div>
+                </div>
+                <button class="btn-secondary" style="font-size:0.75rem;padding:6px 10px;white-space:nowrap;" onclick="showToast('Reminder sent to Pedro Lim ✓')">Send Reminder</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1607,26 +1654,53 @@
                 <input type="text" id="patient-search" placeholder="Search by name or diagnosis…" oninput="filterPatients()" aria-label="Search patients">
                 <button onclick="filterPatients()">Search</button>
               </div>
-              <table>
-                <thead><tr><th>Name</th><th>Age</th><th>Sex</th><th>Diagnosis</th><th>Status</th></tr></thead>
-                <tbody id="patients-tbody">
-                  <tr class="patient-row" onclick="openPatientDetail('Maria Santos',30,'F','High Blood','Treated','25.03','130/80 mmHg','98 mg/dL','O+','Pneumonia (2022)','Losartan 50g')">
-                    <td>Maria Santos</td><td>30</td><td>F</td><td>High Blood</td><td><span class="badge badge-green">Treated</span></td>
-                  </tr>
-                  <tr class="patient-row" onclick="openPatientDetail('Juan Dela Cruz',55,'M','Diabetes','On Follow-up','27.1','140/90 mmHg','180 mg/dL','B+','Hypertension (2020)','Metformin 500mg')">
-                    <td>Juan Dela Cruz</td><td>55</td><td>M</td><td>Diabetes</td><td><span class="badge badge-yellow">On Follow-up</span></td>
-                  </tr>
-                  <tr class="patient-row" onclick="openPatientDetail('Anna Reyes',42,'F','Fever','Treated','22.5','120/80 mmHg','95 mg/dL','A+','None','Paracetamol')">
-                    <td>Anna Reyes</td><td>42</td><td>F</td><td>Fever</td><td><span class="badge badge-green">Treated</span></td>
-                  </tr>
-                  <tr class="patient-row" onclick="openPatientDetail('Pedro Lim',67,'M','Hypertension','High Risk','29.0','160/100 mmHg','110 mg/dL','AB+','Stroke (2019)','Amlodipine 5mg')">
-                    <td>Pedro Lim</td><td>67</td><td>M</td><td>Hypertension</td><td><span class="badge badge-red">High Risk</span></td>
-                  </tr>
-                  <tr class="patient-row" onclick="openPatientDetail('Target Dela Cruz',28,'F','Prenatal','On Schedule','21.0','110/70 mmHg','88 mg/dL','O-','None','Ferrous Sulfate')">
-                    <td>Target Dela Cruz</td><td>28</td><td>F</td><td>Prenatal</td><td><span class="badge badge-blue">On Schedule</span></td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="patient-card-list" id="patients-tbody">
+                <div class="patient-card-item" onclick="openPatientDetail('Maria Santos',30,'F','High Blood','Treated','25.03','130/80 mmHg','98 mg/dL','O+','Pneumonia (2022)','Losartan 50g')">
+                  <div class="patient-card-avatar">👩</div>
+                  <div class="patient-card-info">
+                    <div class="patient-card-name">Maria Santos</div>
+                    <div class="patient-card-sub">Age 30 · F · High Blood</div>
+                  </div>
+                  <span class="badge badge-green">Treated</span>
+                  <span class="patient-card-arrow">›</span>
+                </div>
+                <div class="patient-card-item" onclick="openPatientDetail('Juan Dela Cruz',55,'M','Diabetes','On Follow-up','27.1','140/90 mmHg','180 mg/dL','B+','Hypertension (2020)','Metformin 500mg')">
+                  <div class="patient-card-avatar">👨</div>
+                  <div class="patient-card-info">
+                    <div class="patient-card-name">Juan Dela Cruz</div>
+                    <div class="patient-card-sub">Age 55 · M · Diabetes</div>
+                  </div>
+                  <span class="badge badge-yellow">On Follow-up</span>
+                  <span class="patient-card-arrow">›</span>
+                </div>
+                <div class="patient-card-item" onclick="openPatientDetail('Anna Reyes',42,'F','Fever','Treated','22.5','120/80 mmHg','95 mg/dL','A+','None','Paracetamol')">
+                  <div class="patient-card-avatar">👩</div>
+                  <div class="patient-card-info">
+                    <div class="patient-card-name">Anna Reyes</div>
+                    <div class="patient-card-sub">Age 42 · F · Fever</div>
+                  </div>
+                  <span class="badge badge-green">Treated</span>
+                  <span class="patient-card-arrow">›</span>
+                </div>
+                <div class="patient-card-item" onclick="openPatientDetail('Pedro Lim',67,'M','Hypertension','High Risk','29.0','160/100 mmHg','110 mg/dL','AB+','Stroke (2019)','Amlodipine 5mg')">
+                  <div class="patient-card-avatar">👨</div>
+                  <div class="patient-card-info">
+                    <div class="patient-card-name">Pedro Lim</div>
+                    <div class="patient-card-sub">Age 67 · M · Hypertension</div>
+                  </div>
+                  <span class="badge badge-red">High Risk</span>
+                  <span class="patient-card-arrow">›</span>
+                </div>
+                <div class="patient-card-item" style="border-bottom:none;" onclick="openPatientDetail('Target Dela Cruz',28,'F','Prenatal','On Schedule','21.0','110/70 mmHg','88 mg/dL','O-','None','Ferrous Sulfate')">
+                  <div class="patient-card-avatar">👩</div>
+                  <div class="patient-card-info">
+                    <div class="patient-card-name">Target Dela Cruz</div>
+                    <div class="patient-card-sub">Age 28 · F · Prenatal</div>
+                  </div>
+                  <span class="badge badge-blue">On Schedule</span>
+                  <span class="patient-card-arrow">›</span>
+                </div>
+              </div>
               <div style="margin-top:12px;font-size:0.8rem;color:var(--muted);">Page 1 of 285 records</div>
             </div>
           </div>
@@ -2348,8 +2422,8 @@
   // ===================== PATIENTS (HW ONLY) =====================
   function filterPatients() {
     const q = document.getElementById('patient-search').value.toLowerCase();
-    document.querySelectorAll('#patients-tbody tr').forEach(row => {
-      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    document.querySelectorAll('#patients-tbody .patient-card-item').forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
     });
   }
 
